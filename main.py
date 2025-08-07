@@ -30,7 +30,7 @@ def update_step(con,cur,):
         query = f"""
     UPDATE contact_list
     SET Step = CASE
-                  WHEN Step + 1 > {max_step} THEN {max_step}
+                  WHEN Step + 1 > {max_step} THEN {max_step} + 1
                   ELSE Step + 1
               END;
     """
@@ -44,7 +44,7 @@ def update_step(con,cur,):
 #  TODO Logic for prefered days
 def sender_logic(email, step):
     try:
-        if step == int(max_step):
+        if step > int(max_step):
             return "Finished the course"
         path_to_message = f"{path_to_content}/{step}.txt"
         with open(path_to_message, "r") as f:
